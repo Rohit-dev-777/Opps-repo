@@ -14,7 +14,7 @@ class EBoard
 {
  string name;
  int unit;
- float charges=56.78;
+ float charges=0;
   public:
   void setname(string name)
   {
@@ -38,17 +38,30 @@ float cost()
   }
   else if(unit<=100)
   {
-    charges=50+unit*60;
+    charges=50+(unit*60)/100;
+    if(charges>300)
+     {
+       charges=charges + (0.15)*(charges);
+     }
   }
   else if(unit<=300 && unit>100)
   {
-    charges=50+(unit-100)*80 + (100*60);
+    charges=50+((unit-100)*80)/100+ (100*60)/100;
+    if(charges>300)
+     {
+       charges=charges + (0.15)*(charges);
+     }
   }
   else
   {
-    charges=(50+(unit-300)*90 +(100*60)+ (200*80)) + ((0.15)*(50+(unit-300)*90 +(100*60)+ (200*80)));
+    charges=(50+((unit-300)*90)/100 +(100*60)/100+ (200*80)/100);
+    if(charges>300)
+     {
+       charges=charges + (0.15)*(charges);
+     }
   }
-}
+  }
+
 };
 
 int main()
@@ -62,6 +75,5 @@ int main()
       C.setunit(unit);
      C.cost();
      C.display();
-  
   return 0;
 }
